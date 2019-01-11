@@ -18,10 +18,10 @@ export default class Header extends  Component{
                             <span>成都中医药大学附属医院</span>
                     </Row>
                     <Row className="breadcrumb">
-                        <Col span="4" className="breadcrumb-title">
+                        <Col span={4} className="breadcrumb-title">
                            首页
                         </Col>
-                        <Col span="20" className="welcome">
+                        <Col span={20} className="welcome">
                             <span>欢迎，{this.state.userName}</span>
                             <a href="#">退出</a>
                         </Col>

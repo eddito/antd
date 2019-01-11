@@ -7,6 +7,80 @@ const FormItem = Form.Item;
 const Search = Input.Search;
 const EditableContext = React.createContext();
 
+
+const data1 = [
+    {
+    key: 1,
+    name: '感冒',
+},
+    {
+    key: 2,
+    name: '慢性咽炎',
+},
+];
+
+const data2= [
+    {
+        key: 1,
+        name: '感冒',
+    },
+    {
+        key: 2,
+        name: '慢性咽炎',
+    },
+];
+
+const columns1 = [{
+    title: '证型名称',
+    dataIndex: 'name',
+    key: 'name',
+    align: 'center',
+},{
+    title: '操作',
+    dataIndex: 'operate',
+    key: 'operate',
+    align: 'center',
+
+    // render: (text,record) =>{
+    //     console.log('text',text); //text为地址的每一项，甘肃省、华池县、武汉市、黄冈市
+    //     console.log('record',record);//record 为多个个对象，例如第一个对象为：{ name: '天下',age: 18,hobby: '看书',address: '甘肃省' }
+    // }
+    render: (text,record)=>(
+        data1.length >= 1
+        ? (
+                <Popconfirm title="确认删除?" okText="确认" cancelText="取消">
+                    <Button>删除</Button>
+                </Popconfirm>
+            ):null
+    ),
+}]
+
+
+const columns2 = [{
+    title: '证型名称',
+    dataIndex: 'name',
+    key: 'name',
+    align: 'center',
+},{
+    title: '操作',
+    dataIndex: 'operate',
+    key: 'operate',
+    align: 'center',
+
+    // render: (text,record) =>{
+    //     console.log('text',text); //text为地址的每一项，甘肃省、华池县、武汉市、黄冈市
+    //     console.log('record',record);//record 为多个个对象，例如第一个对象为：{ name: '天下',age: 18,hobby: '看书',address: '甘肃省' }
+    // }
+    render: (text,record)=>(
+        data1.length >= 1
+            ? (
+                <Popconfirm title="确认添加?"  okText="确认" cancelText="取消">
+                    <Button>添加</Button>
+                </Popconfirm>
+            ):null
+    ),
+}]
+
 const EditableRow = ({ form, index, ...props }) => (
     <EditableContext.Provider value={form}>
         <tr {...props} />
@@ -115,76 +189,6 @@ const EditableFormRow = Form.create()(EditableRow);
 export default class Content extends React.Component {
     constructor(props) {
         super(props);
-        this.columns = [{
-            title: '疾病名称',
-            dataIndex: 'name',
-            width: '30%',
-            editable: true,
-        }, {
-            title: '疾病拼音',
-            dataIndex: 'pinyin',
-        },  {
-            title: '操作',
-            dataIndex: 'operation',
-            render: (text, record) => (
-                this.state.dataSource.length >= 1
-                    ? (
-                        <div className='operation'>
-                            <Button onClick={this.setModal3Visible} className='btn'>编辑</Button>
-                            <Modal
-                                visible={this.state.modal3Visible}
-                                title="编辑"
-                                okText='保存'
-                                cancelText='取消'
-                                onOk={this.handleOk}
-                                onCancel={this.handleCancel}
-                                >
-                                <Input placeholder="编辑疾病名称" onChange={this.onChangeNameText} />
-                                <Input placeholder="编辑疾病拼音" onChange={this.onChangePYText} />
-                            </Modal>
-                                <Button onClick={this.setModal2Visible} className='btn'>关联证型</Button>
-                                <Modal
-                                    width={1200}
-                                    title='关联病症'
-                                    okText='完成'
-                                    cancelText='取消'
-                                    visible={this.state.modal2Visible}
-                                    onCancel={this.handleCancel}
-                                >
-                                    <Row>
-                                        <Col span={12}>
-                                            <div>已关联证型</div>
-                                            <div>
-                                                <span>风寒感冒</span>
-                                                <Popconfirm title="确认删除?" onConfirm={() => this.showModal} okText="确认" cancelText="取消">
-                                                    <Button>删除</Button>
-                                                </Popconfirm>
-                                            </div>
-                                        </Col>
-                                        <Col span={12}>
-                                            <span>未关联证型</span>
-                                            <Search
-                                                placeholder="请输入疾病名称或疾病拼音"
-                                                onSearch={value => console.log(value)}
-                                                style={{ width: 240 }}
-                                            />
-                                            <div>
-                                                <span>风寒感冒</span>
-                                                <Popconfirm title="确认添加?" onConfirm={() => this.showModal} okText="确认" cancelText="取消">
-                                                    <Button>添加</Button>
-                                                </Popconfirm>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </Modal>
-                            <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(record.key)} okText="确认" cancelText="取消">
-                                <Button>删除</Button>
-                            </Popconfirm>
-                        </div>
-                    ) : null
-            ),
-        }];
-
         this.state = {
             dataSource: [{
                 key: '0',
@@ -202,34 +206,120 @@ export default class Content extends React.Component {
             modal3Visible: false,
             nameText: '',
             pyText: '',
+            selectedRowKeys: [],
         };
+        this.columns = [
+            {
+            title: '疾病名称',
+            dataIndex: 'name',
+            width: '30%',
+            editable: true,
+                align: 'center'
+        },
+            {
+            title: '疾病拼音',
+            dataIndex: 'pinyin',
+                align: 'center'
+        },
+            {
+            title: '操作',
+            dataIndex: 'operation', 
+                align: 'center',
+            render: (text, record) => (
+                this.state.dataSource.length >= 1
+                    ? (
+                        <div className='operation'>
+                            <Button onClick={this.setModal1Visible} className='btn'>编辑</Button>
+                            <Modal
+                                visible={this.state.modal1Visible}
+                                title="编辑"
+                                okText='保存'
+                                cancelText='取消'
+                                className={"form-modal1"}
+                                bodyStyle={{ padding: '32px 40px 48px' }}
+                                onOk={this.handleOk}
+                                onCancel={this.handleCancel}
+                                 >
+                                <Input placeholder="编辑疾病名称" onChange={this.onChangeNameText} className={"name-input"}/>
+                                <Input placeholder="编辑疾病拼音" onChange={this.onChangePYText} className={"py-input"} />
+                            </Modal>
+                            <Button onClick={this.setModal2Visible} className='btn'>关联证型</Button>
+                            <Modal
+                                width={1200}
+                                title='关联证型'
+                                okText='完成'
+                                cancelText='取消'
+                                visible={this.state.modal2Visible}
+                                onCancel={this.handleCancel}
+                                className="form-modal"
+                            >
+                                <Row className="breadcrumb">
+                                    <Col span={12} className="breadcrumb-title">
+                                        <div className="syndrome-title">已关联证型</div>
+                                        <Table
+                                            dataSource={data1}
+                                            columns={columns1}
+                                        />
+                                    </Col>
+                                    <Col span={12} className="breadcrumb-title">
+                                        <div  className="syndrome-title">
+                                            <span>未关联证型</span>
+                                            <Search
+                                                placeholder="根据疾病名称或疾病拼音搜索证型"
+                                                onSearch={value => console.log(value)}
+                                                style={{ width: 260, marginLeft: 240 }}
+                                            />
+                                        </div>
+                                        <Table
+                                            dataSource={data2}
+                                            columns={columns2}
+                                        />
+                                        </Col>
+                                    </Row>
+                                </Modal>
+                            <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(record.key)} okText="确认" cancelText="取消">
+                                <Button>删除</Button>
+                            </Popconfirm>
+                        </div>
+                    ) : null
+            ),
+        }
+        ];
     }
 
-    //显示Modal
+    //选中记录条数
+    onSelectChange = (selectedRowKeys) => {
+        this.setState({ selectedRowKeys });
+    };
+
+
+    //显示编辑疾病Modal
     setModal1Visible = () => {
         this.setState({
             modal1Visible: true,
         });
-    }
+    };
 
+    //显示关联病症Modal
     setModal2Visible = () => {
         this.setState({
             modal2Visible: true,
         });
-    }
+    };
 
+    //显示增加疾病Modal
     setModal3Visible = () => {
         this.setState({
             modal3Visible: true,
         });
-    }
+    };
 
     //确认编辑、修改、删除
     handleOk = (e) => {
         this.setState({
             visible: false,
         });
-    }
+    };
 
     //取消编辑、修改、删除
     handleCancel = (e) => {
@@ -238,23 +328,23 @@ export default class Content extends React.Component {
             modal2Visible: false,
             modal3Visible: false,
         });
-    }
+    };
 
     //添加疾病名称
     onChangeNameText= (e) => {
         this.setState({ nameText: e.target.value });
-    }
+    };
 
     //添加疾病拼音
     onChangePYText= (e) => {
         this.setState({ pyText: e.target.value });
-    }
+    };
 
     //删除一条疾病
     handleDelete = (key) => {
         const dataSource = [...this.state.dataSource];
         this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
-    }
+    };
 
     //添加一条疾病
     handleAdd = () => {
@@ -269,9 +359,9 @@ export default class Content extends React.Component {
             count: count + 1,
             nameText: '',
             pyText: '',
-            visible: false,
+            modal3Visible: false,
         });
-    }
+    };
 
     handleSave = (row) => {
         const newData = [...this.state.dataSource];
@@ -282,10 +372,16 @@ export default class Content extends React.Component {
             ...row,
         });
         this.setState({ dataSource: newData });
-    }
+    };
 
     render() {
-        const { dataSource } = this.state;
+        const { dataSource, selectedRowKeys } = this.state;
+        const key = dataSource.key;
+        const hasSelected = selectedRowKeys.length > 0;
+        const rowSelection = {
+            selectedRowKeys,
+            onChange: this.onSelectChange,
+        };
         const components = {
             body: {
                 row: EditableFormRow,
@@ -308,29 +404,39 @@ export default class Content extends React.Component {
             };
         });
         return (
-            <div>
-                <Button onClick={this.setModal1Visible}  style={{ marginBottom: 16 }}>
-                    添加疾病
-                </Button>
-                <Modal
-                title='添加疾病'
-                okText='添加'
-                cancelText='取消'
-                visible={this.state.modal1Visible}
-                destroyOnClose={true}
-                onOk={this.handleAdd}
-                onCancel={this.handleCancel}
-                >
-                    <Input placeholder="请输入疾病名称" onChange={this.onChangeNameText} />
-                    <Input placeholder="请输入疾病拼音" onChange={this.onChangePYText} />
-                </Modal>
-                <Button  style={{ marginBottom: 16 }}>
-                    删除
-                </Button>
+            <div className='content'>
+                <div style={{ marginBottom: 16 }}>
+                    <Button onClick={this.setModal3Visible}  style={{ marginRight: 5, marginBottom: 16 }}>
+                        添加疾病
+                    </Button>
+                    <Modal
+                        title='添加疾病'
+                        okText='添加'
+                        cancelText='取消'
+                        className={"form-modal1"}
+                        visible={this.state.modal3Visible}
+                        bodyStyle={{ padding: '32px 40px 48px' }}
+                        onOk={this.handleAdd}
+                        onCancel={this.handleCancel}
+                    >
+                        <Input placeholder="请输入疾病名称" onChange={this.onChangeNameText} className={"name-input"} />
+                        <Input placeholder="请输入疾病拼音" onChange={this.onChangePYText} className={"py-input"} />
+                    </Modal>
+                    <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(key)} okText="确认" cancelText="取消">
+                        <Button
+                            disabled={!hasSelected}
+                        >
+                            批量删除
+                        </Button>
+                    </Popconfirm>
+                    <span style={{ marginLeft: 8 }}>
+            {hasSelected ? `选中 ${selectedRowKeys.length} 条记录` : ''}
+          </span>
+                </div>
                 <Table
                     components={components}
+                    rowSelection={rowSelection}
                     rowClassName={() => 'editable-row'}
-                    bordered
                     dataSource={dataSource}
                     columns={columns}
                 />
