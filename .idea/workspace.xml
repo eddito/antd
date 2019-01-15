@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbfb25a6-bb28-4f34-a777-bc3ffcad0b9f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/Content/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/Content/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/Content/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/Content/index.less" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,27 +20,19 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/component/Content/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
-              <caret line="267" column="77" selection-start-line="267" selection-start-column="77" selection-end-line="267" selection-end-column="77" />
+            <state relative-caret-position="400">
+              <caret line="391" column="53" selection-start-line="391" selection-start-column="47" selection-end-line="391" selection-end-column="53" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
-                <element signature="e#275#452#0" />
-                <element signature="e#372#451#0" />
-                <element signature="e#794#822#0" />
-                <element signature="e#1330#1358#0" />
+                <element signature="e#276#355#0" />
+                <element signature="e#371#474#0" />
+                <element signature="e#495#578#0" />
+                <element signature="e#973#1097#0" />
+                <element signature="e#1147#1230#0" />
+                <element signature="e#1629#1754#0" />
                 <element signature="n#EditableTable#0" />
-                <element signature="e#3854#4338#0" />
-                <element signature="e#5059#5800#0" />
-                <element signature="e#8495#8571#0" />
-                <element signature="e#8602#8678#0" />
-                <element signature="e#8709#8785#0" />
-                <element signature="e#8826#8897#0" />
-                <element signature="e#8942#9087#0" />
-                <element signature="e#9131#9191#0" />
-                <element signature="e#9233#9291#0" />
-                <element signature="e#9334#9480#0" />
-                <element signature="e#9517#9914#0" />
-                <element signature="e#9942#10245#0" />
+                <element signature="n#!!block;n#componentDidMount#0;n#EditableTable#0" />
+                <element signature="n#!!block;n#componentWillUnmount#0;n#EditableTable#0" />
               </folding>
             </state>
           </provider>
@@ -50,8 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/component/Content/index.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+            <state>
+              <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -71,6 +62,7 @@
       <find>record</find>
       <find>hasSelected</find>
       <find>breadcrumb</find>
+      <find>handleDelete</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -100,7 +92,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="315" />
     <option name="y" value="34" />
     <option name="width" value="1400" />
@@ -149,7 +141,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="F:/antd" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../project/kangjiaxin2" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -200,15 +192,16 @@
       <workItem from="1547081269021" duration="3714000" />
       <workItem from="1547104737236" duration="6305000" />
       <workItem from="1547168983096" duration="19153000" />
+      <workItem from="1547198383706" duration="600000" />
+      <workItem from="1547427004785" duration="3667000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63185000" />
+    <option name="totallyTimeSpent" value="67452000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="npm" order="0" side_tool="true" />
       <window_info id="Favorites" order="1" side_tool="true" />
@@ -228,7 +221,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Project" order="3" visible="true" weight="0.2675906" />
+      <window_info anchor="right" content_ui="combo" id="Project" order="3" visible="true" weight="0.27292112" />
     </layout>
     <layout-to-restore>
       <window_info id="npm" order="0" side_tool="true" />
@@ -312,13 +305,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/课程源码/src/components/Header/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1269">
-          <caret line="4" column="31" lean-forward="true" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Desktop/课程源码/src/components/Header/index.js" />
     <entry file="file://$PROJECT_DIR$/src/config/menuConfig.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -390,34 +377,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/Content/index.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+        <state>
+          <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/Content/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="267" column="77" selection-start-line="267" selection-start-column="77" selection-end-line="267" selection-end-column="77" />
+        <state relative-caret-position="400">
+          <caret line="391" column="53" selection-start-line="391" selection-start-column="47" selection-end-line="391" selection-end-column="53" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
-            <element signature="e#275#452#0" />
-            <element signature="e#372#451#0" />
-            <element signature="e#794#822#0" />
-            <element signature="e#1330#1358#0" />
+            <element signature="e#276#355#0" />
+            <element signature="e#371#474#0" />
+            <element signature="e#495#578#0" />
+            <element signature="e#973#1097#0" />
+            <element signature="e#1147#1230#0" />
+            <element signature="e#1629#1754#0" />
             <element signature="n#EditableTable#0" />
-            <element signature="e#3854#4338#0" />
-            <element signature="e#5059#5800#0" />
-            <element signature="e#8495#8571#0" />
-            <element signature="e#8602#8678#0" />
-            <element signature="e#8709#8785#0" />
-            <element signature="e#8826#8897#0" />
-            <element signature="e#8942#9087#0" />
-            <element signature="e#9131#9191#0" />
-            <element signature="e#9233#9291#0" />
-            <element signature="e#9334#9480#0" />
-            <element signature="e#9517#9914#0" />
-            <element signature="e#9942#10245#0" />
+            <element signature="n#!!block;n#componentDidMount#0;n#EditableTable#0" />
+            <element signature="n#!!block;n#componentWillUnmount#0;n#EditableTable#0" />
           </folding>
         </state>
       </provider>

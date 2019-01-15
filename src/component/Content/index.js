@@ -21,11 +21,67 @@ const data1 = [
 
 const data2= [
     {
-        key: 1,
+        key: 3,
         name: '感冒',
     },
     {
-        key: 2,
+        key: 4,
+        name: '慢性咽炎',
+    },
+    {
+        key: 5,
+        name: '慢性咽炎',
+    },
+    {
+        key: 6,
+        name: '慢性咽炎',
+    },
+    {
+        key: 7,
+        name: '慢性咽炎',
+    },
+    {
+        key: 8,
+        name: '慢性咽炎',
+    },
+    {
+        key: 9,
+        name: '慢性咽炎',
+    },
+    {
+        key: 10,
+        name: '慢性咽炎',
+    },
+    {
+        key: 11,
+        name: '慢性咽炎',
+    },
+    {
+        key: 12,
+        name: '慢性咽炎',
+    },
+    {
+        key: 13,
+        name: '慢性咽炎',
+    },
+    {
+        key: 14,
+        name: '慢性咽炎',
+    },
+    {
+        key: 15,
+        name: '慢性咽炎',
+    },
+    {
+        key: 16,
+        name: '慢性咽炎',
+    },
+    {
+        key: 17,
+        name: '慢性咽炎',
+    },
+    {
+        key: 18,
         name: '慢性咽炎',
     },
 ];
@@ -40,11 +96,6 @@ const columns1 = [{
     dataIndex: 'operate',
     key: 'operate',
     align: 'center',
-
-    // render: (text,record) =>{
-    //     console.log('text',text); //text为地址的每一项，甘肃省、华池县、武汉市、黄冈市
-    //     console.log('record',record);//record 为多个个对象，例如第一个对象为：{ name: '天下',age: 18,hobby: '看书',address: '甘肃省' }
-    // }
     render: (text,record)=>(
         data1.length >= 1
         ? (
@@ -53,7 +104,7 @@ const columns1 = [{
                 </Popconfirm>
             ):null
     ),
-}]
+}];
 
 
 const columns2 = [{
@@ -66,11 +117,6 @@ const columns2 = [{
     dataIndex: 'operate',
     key: 'operate',
     align: 'center',
-
-    // render: (text,record) =>{
-    //     console.log('text',text); //text为地址的每一项，甘肃省、华池县、武汉市、黄冈市
-    //     console.log('record',record);//record 为多个个对象，例如第一个对象为：{ name: '天下',age: 18,hobby: '看书',address: '甘肃省' }
-    // }
     render: (text,record)=>(
         data1.length >= 1
             ? (
@@ -79,7 +125,7 @@ const columns2 = [{
                 </Popconfirm>
             ):null
     ),
-}]
+}];
 
 const EditableRow = ({ form, index, ...props }) => (
     <EditableContext.Provider value={form}>
@@ -115,14 +161,14 @@ const EditableFormRow = Form.create()(EditableRow);
                 this.input.focus();
             }
         });
-    }
+    };
 
     handleClickOutside = (e) => {
         const { editing } = this.state;
         if (editing && this.cell !== e.target && !this.cell.contains(e.target)) {
             this.save();
         }
-    }
+    };
 
     save = () => {
         const { record, handleSave } = this.props;
@@ -133,7 +179,7 @@ const EditableFormRow = Form.create()(EditableRow);
             this.toggleEdit();
             handleSave({ ...record, ...values });
         });
-    }
+    };
 
     render() {
         const { editing } = this.state;
