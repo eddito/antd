@@ -1,12 +1,16 @@
 import React, { Component, Fragment } from 'react'
 import { Menu, Icon } from 'antd';
+import {NavLink} from 'react-router-dom'
 import MenuConfig from './../../config/menuConfig';
 import './index.less';
 const SubMenu = Menu.SubMenu;
  export default class NavLeft extends Component {
-    state = {
-        currentKey: ''
-    }
+     componentWillMount(){
+         const menuTreeNode=this.renderMenu(MenuConfig);
+         this.setState({
+             menuTreeNode
+         })
+     }
     // 菜单点击
     // handleClick = ({ item, key }) => {
     //     if (key === this.state.currentKey) {
@@ -21,26 +25,25 @@ const SubMenu = Menu.SubMenu;
     //     });
     //     // hashHistory.push(key);
     // };
-    componentWillMount(){
-        const menuTreeNode = this.renderMenu(MenuConfig);
-
-        this.setState({
-            menuTreeNode
-        })
-    }
     // 菜单渲染
-    renderMenu =(data)=>{
-        return data.map((item)=>{
-            if(item.children){
-                return (
-                    <SubMenu title={item.title} key={item.key}>
-                        { this.renderMenu(item.children)}
-                    </SubMenu>
-                )
-            }
-            return <Menu.Item title={item.title} key={item.key}>{item.title}</Menu.Item>
-        })
-    };
+     renderMenu=(data)=>{
+         return data.map(item=>{
+             if (item.children){
+                 return (
+                     <SubMenu title={item.title} key={item.key}>
+                         {this.renderMenu(item.children)}
+                     </SubMenu>
+                 )
+             }
+             return(
+                 <Menu.Item title={item.title} key={item.key}>
+                     <NavLink to={item.key}>
+                         {item.title}
+                     </NavLink>
+                 </Menu.Item>
+             )
+         })
+     }
     // homeHandleClick = () => {
     //     const { dispatch } = this.props;
     //     dispatch(switchMenu('首页'));
