@@ -1,27 +1,16 @@
-import React, { Component, Fragment } from 'react';
-import Button from 'antd/lib/button';
-import { Row, Col } from 'antd';
-import Header from './component/Header';
-import NavLeft from './component/Navleft';
-import Content from './component/Content';
+import React, { Component } from 'react';
+import logo from './logo.svg';
 import './App.css';
-import Footer from "./component/Footer";
+import Button from 'antd/lib/button';
 
 class App extends Component {
-  render() {
-    return (
-        <Fragment>
-            <Row>
-                <Col span={3}><NavLeft /></Col>
-                <Col span={21}>
-                    <Header />
-                    <Content />
-                    <Footer/>
-                </Col>
-            </Row>
-        </Fragment>
-    );
-  }
+    render() {
+        return (
+            <div >
+                {this.props.children}
+            </div>
+        );
+    }
 }
 
 export default App;

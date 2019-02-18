@@ -1,17 +1,11 @@
 const menuList = [
     {
-        title: '疾病',
-        key: '/disease',
-        children: [
-            {
-                title: '相关疾病',
-                key: '/disease/modals',
-            },
-            ]
+        title: '疾病关联',
+        key: '/admin/disease',
     },
     {
-        title: '证型',
-        key: '/syndromeType',
+        title: '问卷管理',
+        key: '/admin/syndromeType',
     },
     // {
     //     title: '表单',
