@@ -86,47 +86,6 @@ const data2= [
     },
 ];
 
-const columns1 = [{
-    title: '证型名称',
-    dataIndex: 'name',
-    key: 'name',
-    align: 'center',
-},{
-    title: '操作',
-    dataIndex: 'operate',
-    key: 'operate',
-    align: 'center',
-    render: (text,record)=>(
-        data1.length >= 1
-        ? (
-                <Popconfirm title="确认删除?" okText="确认" cancelText="取消">
-                    <Button>删除</Button>
-                </Popconfirm>
-            ):null
-    ),
-}];
-
-
-const columns2 = [{
-    title: '证型名称',
-    dataIndex: 'name',
-    key: 'name',
-    align: 'center',
-},{
-    title: '操作',
-    dataIndex: 'operate',
-    key: 'operate',
-    align: 'center',
-    render: (text,record)=>(
-        data1.length >= 1
-            ? (
-                <Popconfirm title="确认添加?"  okText="确认" cancelText="取消">
-                    <Button>添加</Button>
-                </Popconfirm>
-            ):null
-    ),
-}];
-
 const EditableRow = ({ form, index, ...props }) => (
     <EditableContext.Provider value={form}>
         <tr {...props} />
@@ -240,11 +199,14 @@ export default class Content extends React.Component {
                 key: '0',
                 name: '头痛',
                 pinyin: 'tt',
-            }, {
+            },
+                {
                 key: '1',
                 name: '慢性咽炎，感冒',
                 pinyin: 'mxyy,gm',
             }],
+            data1:data1,
+            data2:data2,
             count: 2,
             loading: false,
             modal1Visible: false,
@@ -254,6 +216,7 @@ export default class Content extends React.Component {
             pyText: '',
             selectedRowKeys: [],
         };
+
         this.columns = [
             {
             title: '疾病名称',
@@ -303,8 +266,8 @@ export default class Content extends React.Component {
                                     <Col span={12} className="breadcrumb-title">
                                         <div className="syndrome-title">已关联证型</div>
                                         <Table
-                                            dataSource={data1}
-                                            columns={columns1}
+                                            dataSource={this.state.data1}
+                                            columns={this.columns1}
                                         />
                                     </Col>
                                     <Col span={12} className="breadcrumb-title">
@@ -317,9 +280,10 @@ export default class Content extends React.Component {
                                             />
                                         </div>
                                         <Table
-                                            dataSource={data2}
-                                            columns={columns2}
+                                            dataSource={this.state.data2}
+                                            columns={this.columns2}
                                         />
+                                        {console.log("data2",this.state.data2)}
                                         </Col>
                                     </Row>
                                 </Modal>
@@ -331,6 +295,46 @@ export default class Content extends React.Component {
             ),
         }
         ];
+        this.columns2=[{
+            title: '证型名称',
+            dataIndex: 'name',
+            key: 'name',
+            align: 'center',
+        },{
+            title: '操作',
+            dataIndex: 'operate',
+            key: 'operate',
+            align: 'center',
+            render: (text,record)=>(
+                data1.length >= 1
+                    ? (
+                        <Popconfirm title="确认添加?" onConfirm={()=>this.addDiease(record)} okText="确认" cancelText="取消">
+                            {console.log('@text',text,"@record",record)}
+                            <Button >添加</Button>
+                        </Popconfirm>
+                    ):null
+            ),
+        }];
+        this.columns1= [{
+            title: '证型名称',
+            dataIndex: 'name',
+            key: 'name',
+            align: 'center',
+        },{
+            title: '操作',
+            dataIndex: 'operate',
+            key: 'operate',
+            align: 'center',
+            render: (text,record)=>(
+                data1.length >= 1
+                    ? (
+                        <Popconfirm title="确认删除?" onConfirm={()=>this.handleDeleteDisease(record)} okText="确认" cancelText="取消">
+                            <Button>删除</Button>
+                        </Popconfirm>
+                    ):null
+            ),
+        }];
+
     }
 
     //选中记录条数
@@ -352,6 +356,28 @@ export default class Content extends React.Component {
             modal2Visible: true,
         });
     };
+
+    //添加关联证型
+    addDiease=(row)=>{
+        let data3=this.state.data1
+        let repeat =true
+        data3.map(data=>{
+            if (data.key ===row.key){
+                repeat =false
+            }
+        })
+         if (repeat){
+             data3.splice(data3.length,0,row)
+         }
+        this.setState({
+            data1:data3
+        })
+    }
+    //删除关联证型
+    handleDeleteDisease=(key)=>{
+        const dataA = [...this.state.data1];
+        this.setState({ data1: dataA.filter(item => item.key !== key.key) });
+}
 
     //显示增加疾病Modal
     setModal3Visible = () => {
@@ -391,6 +417,19 @@ export default class Content extends React.Component {
         const dataSource = [...this.state.dataSource];
         this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
     };
+
+    //批量删除
+    handleDeleteAll=(key)=>{
+        const dataSource = [...this.state.dataSource];
+        const dataKey=[...this.state.selectedRowKeys]
+        this.setState({
+            dataSource:dataSource.filter(item=>{
+                dataKey.map(key=>{
+                   return key.key !==item.key
+                })
+            })
+        })
+    }
 
     //添加一条疾病
     handleAdd = () => {
@@ -468,12 +507,13 @@ export default class Content extends React.Component {
                         <Input placeholder="请输入疾病名称" onChange={this.onChangeNameText} className={"name-input"} />
                         <Input placeholder="请输入疾病拼音" onChange={this.onChangePYText} className={"py-input"} />
                     </Modal>
-                    <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(key)} okText="确认" cancelText="取消">
+                    <Popconfirm title="确认删除?" onConfirm={() => this.handleDeleteAll(key)} okText="确认" cancelText="取消">
                         <Button
                             disabled={!hasSelected}
                         >
                             批量删除
                         </Button>
+                        {console.log("@key",this.state.selectedRowKeys)}
                     </Popconfirm>
                     <span style={{ marginLeft: 8 }}>
             {hasSelected ? `选中 ${selectedRowKeys.length} 条记录` : ''}
