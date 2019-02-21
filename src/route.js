@@ -9,7 +9,7 @@ export default class Router extends React.Component{
         return(
             <HashRouter>
                 <App>
-                        <Route path={'/admin'} component={()=>
+                        <Route path={'/'} component={()=>
                             <Admin>
                                 <Switch>
                                     <Route path={'/admin/disease'} component={Disease}/>

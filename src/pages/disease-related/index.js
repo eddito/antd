@@ -204,7 +204,12 @@ export default class Content extends React.Component {
                 key: '1',
                 name: '慢性咽炎，感冒',
                 pinyin: 'mxyy,gm',
-            }],
+            },
+                {
+                    key: '2',
+                    name: '慢性咽炎',
+                    pinyin: 'mxyy',
+                }],
             data1:data1,
             data2:data2,
             count: 2,
@@ -215,6 +220,7 @@ export default class Content extends React.Component {
             nameText: '',
             pyText: '',
             selectedRowKeys: [],
+            rowKey:null
         };
 
         this.columns = [
@@ -238,7 +244,7 @@ export default class Content extends React.Component {
                 this.state.dataSource.length >= 1
                     ? (
                         <div className='operation'>
-                            <Button onClick={this.setModal1Visible} className='btn'>编辑</Button>
+                            <Button onClick={()=>this.setModal1Visible(record)} className='btn'>编辑</Button>
                             <Modal
                                 visible={this.state.modal1Visible}
                                 title="编辑"
@@ -246,11 +252,12 @@ export default class Content extends React.Component {
                                 cancelText='取消'
                                 className={"form-modal1"}
                                 bodyStyle={{ padding: '32px 40px 48px' }}
-                                onOk={this.handleOk}
+                                onOk={()=>this.handleOk(this.state.rowKey)}
                                 onCancel={this.handleCancel}
                                  >
-                                <Input placeholder="编辑疾病名称" onChange={this.onChangeNameText} className={"name-input"}/>
-                                <Input placeholder="编辑疾病拼音" onChange={this.onChangePYText} className={"py-input"} />
+
+                                <Input placeholder="编辑疾病名称" onChange={this.onChangeNameText} value={this.state.nameText} className={"name-input"}/>
+                                <Input placeholder="编辑疾病拼音" onChange={this.onChangePYText} value={this.state.pyText} className={"py-input"} />
                             </Modal>
                             <Button onClick={this.setModal2Visible} className='btn'>关联证型</Button>
                             <Modal
@@ -295,7 +302,8 @@ export default class Content extends React.Component {
             ),
         }
         ];
-        this.columns2=[{
+        this.columns2=[
+            {
             title: '证型名称',
             dataIndex: 'name',
             key: 'name',
@@ -315,7 +323,8 @@ export default class Content extends React.Component {
                     ):null
             ),
         }];
-        this.columns1= [{
+        this.columns1= [
+            {
             title: '证型名称',
             dataIndex: 'name',
             key: 'name',
@@ -344,9 +353,12 @@ export default class Content extends React.Component {
 
 
     //显示编辑疾病Modal
-    setModal1Visible = () => {
+    setModal1Visible = (row) => {
         this.setState({
             modal1Visible: true,
+            rowKey:row.key,
+            nameText:row.name,
+            pyText:row.pinyin
         });
     };
 
@@ -373,6 +385,8 @@ export default class Content extends React.Component {
             data1:data3
         })
     }
+
+
     //删除关联证型
     handleDeleteDisease=(key)=>{
         const dataA = [...this.state.data1];
@@ -387,10 +401,23 @@ export default class Content extends React.Component {
     };
 
     //确认编辑、修改、删除
-    handleOk = (e) => {
+    handleOk = (row) => {
         this.setState({
-            visible: false,
+            modal1Visible: false,
         });
+        let dataSource1=this.state.dataSource
+        dataSource1.map((data,index)=>{
+            if (data.key===row){
+                data.name=this.state.nameText
+                data.pinyin=this.state.pyText
+            }
+        })
+        this.setState({
+            dataSource:dataSource1
+        })
+            // this.state.dataSource[index].name=this.state.nameText
+        // this.state.dataSource[index].pinyin=this.state.pyText
+
     };
 
     //取消编辑、修改、删除
@@ -420,15 +447,21 @@ export default class Content extends React.Component {
 
     //批量删除
     handleDeleteAll=(key)=>{
-        const dataSource = [...this.state.dataSource];
+        const dataSource = this.state.dataSource;
         const dataKey=[...this.state.selectedRowKeys]
-        this.setState({
-            dataSource:dataSource.filter(item=>{
-                dataKey.map(key=>{
-                   return key.key !==item.key
+        {console.log('@key',dataSource[0])}
+
+            dataKey.map((key)=>{
+                dataSource.map((item,index)=>{
+                    if (key===item.key){
+                        dataSource.splice(index,1)
+                    }
                 })
             })
-        })
+
+        this.setState({
+            dataSource:dataSource
+            })
     }
 
     //添加一条疾病
@@ -523,7 +556,7 @@ export default class Content extends React.Component {
                     components={components}
                     rowSelection={rowSelection}
                     rowClassName={() => 'editable-row'}
-                    dataSource={dataSource}
+                    dataSource={this.state.dataSource}
                     columns={columns}
                 />
             </div>
