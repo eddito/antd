@@ -15,7 +15,7 @@ export default class Header extends  Component{
             <Fragment>
                 <div className="header">
                     <Row className="header-top">
-                            <span>成都中医药大学附属医院</span>
+                            <span>MIC社区管理系统</span>
                     </Row>
                     <Row className="breadcrumb">
                         <Col span={4} className="breadcrumb-title">

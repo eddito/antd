@@ -7,6 +7,10 @@ const menuList = [
         title: '问卷管理',
         key: '/admin/syndromeType',
     },
+    {
+        title: '患者信息',
+        key: '/admin/userinfo',
+    },
     // {
     //     title: '表单',
     //     key: '/form',
