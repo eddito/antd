@@ -20,7 +20,7 @@ class Admin extends Component {
                         <Row className={"content"}>
                             {this.props.children}
                         </Row>
-                        <Footer/>
+                        {/*<Footer/>*/}
                     </Col>
                 </Row>
             </Fragment>
